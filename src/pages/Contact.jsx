@@ -23,11 +23,11 @@ export function Contact() {
         
             <div className="w-full pt-10 flex flex-col justify-center items-center">
               <p className="font-mono text-2xl text-white text-center bg-black px-4 rounded-sm">Location</p>
-              <iframe className="bg-black p-4 rounded-sm" title="Restaraunt Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d756.8343394070263!2d-73.90244697143386!3d40.64449329820529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25cc2a14245a1%3A0x6d6fd64be0d5e7e5!2sNew%20Food%20King!5e0!3m2!1sen!2sus!4v1759378519852!5m2!1sen!2sus" width="50%" height="500"></iframe>
+              <iframe className="bg-linear-180 from-black to-zinc-900 p-4 rounded-sm" title="Restaraunt Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d756.8343394070263!2d-73.90244697143386!3d40.64449329820529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25cc2a14245a1%3A0x6d6fd64be0d5e7e5!2sNew%20Food%20King!5e0!3m2!1sen!2sus!4v1759378519852!5m2!1sen!2sus" width="50%" height="500"></iframe>
             </div>
 
             <div className="w-full pt-10 flex flex-col justify-center items-center pb-20">
-              <div className="flex flex-col items-start w-1/2 gap-2 bg-black p-5 rounded-sm">
+              <div className="flex flex-col items-start w-1/2 gap-2 bg-linear-to-r from-black to-zinc-900 p-5 rounded-sm">
                 <div className="self-center font-mono text-2xl text-white"><u>Contact</u></div>
                 <p className="font-mono text-2xl text-white">Name:</p>
                 <input className="font-mono text-2xl bg-white w-full rounded-sm" name="Name"></input>
