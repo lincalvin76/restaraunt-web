@@ -5,9 +5,12 @@ import { RiCalendarScheduleFill } from "react-icons/ri";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useCart } from "../Cart";
+
 export function Image() {
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const {cartOpen, setCartOpen} = useCart();
 
   return (
     <div className="min-h-screen flex flex-col bg-black">
@@ -20,7 +23,7 @@ export function Image() {
             <div className="font-mono text-4xl text-white hover:scale-110 transition-all duration-300 z-2"><Link to="/menu">MENU</Link></div>
             <div className="font-mono text-4xl text-white hover:scale-110 transition-all duration-300 z-2"><Link to="/about">ABOUT</Link></div>
             <div className="font-mono text-4xl text-white hover:scale-110 transition-all duration-300 z-2"><Link to="/contact">CONTACT</Link></div>
-            <div className="absolute right-1/16 hover:scale-110 transition-all duration-300"><FaShoppingCart color="white" size="35"/></div>
+            <div className="absolute right-1/16 hover:scale-110 transition-all duration-300" onClick={() => setCartOpen(!cartOpen)}><FaShoppingCart color="white" size="35"/></div>
             <div className="absolute right-4/32 hover:scale-110 transition-all duration-300"><Link to="/images"><FaImages color="white" size="35"/></Link></div>
         </div>
 
@@ -31,7 +34,7 @@ export function Image() {
               {menuOpen ? <FaTimes color="white" size="35"/> : <FaBars color="white" size="35"/>}
             </button>
           </div>
-            <div className="absolute right-1/16 hover:scale-110 transition-all duration-300"><FaShoppingCart color="white" size="35"/></div>
+            <div className="absolute right-1/16 hover:scale-110 transition-all duration-300" onClick={() => setCartOpen(!cartOpen)}><FaShoppingCart color="white" size="35"/></div>
             <div className="absolute right-6/32 hover:scale-110 transition-all duration-300"><Link to="/images"><FaImages color="white" size="35"/></Link></div>
         </div>
 
