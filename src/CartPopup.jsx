@@ -43,7 +43,7 @@ export default function CartPopup() {
                                 Clear
                             </button>
 
-                            <button onClick={() => setIsCartOpen(false)} className="bg-gray-700 px-3 py-1 rounded hover:bg-gray-800">
+                            <button onClick={() => setCartOpen(false)} className="bg-gray-700 px-3 py-1 rounded hover:bg-gray-800">
                                 Close
                             </button>
                         </div>
