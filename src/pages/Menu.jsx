@@ -30,7 +30,7 @@ export function Menu() {
 
     timeOut.current = setTimeout(()=> {
       setAddedOrder(false);
-    }, 3000);
+    }, 2500);
   }
 
 
