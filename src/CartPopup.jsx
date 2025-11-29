@@ -1,7 +1,7 @@
 import { useCart } from "./Cart"
 
 export default function CartPopup() {
-    const {cartItems, totalPrice, removeFromCart, clearCart, cartOpen, setCartOpen} = useCart();
+    const {cartItems, totalPrice, removeFromCart, clearCart, updateQuantity, cartOpen, setCartOpen} = useCart();
 
     if (!cartOpen) return null;
 
@@ -18,9 +18,19 @@ export default function CartPopup() {
                             <div key={i} className="flex justify-between items-center">
                                 <div>
                                     <p className="font-mono">{item.name}</p>
-                                    <p className="text-sm text-gray-400">
-                                        {item.quantity} × ${item.price.toFixed(2)}
-                                    </p>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        
+                                        <button className="px-2 bg-gray-700 rounded" onClick={() => updateQuantity(item.name, Math.max(item.quantity - 1, 1))}>
+                                            -
+                                        </button>
+
+                                        <span>{item.quantity} x ${item.price.toFixed(2)}</span>
+
+                                        <button className="px-2 bg-gray-700 rounded" onClick={() => updateQuantity(item.name, Math.max(item.quantity + 1))}>
+                                            +
+                                        </button>
+
+                                    </div>
                                 </div>
                                 <div className="item-right flex flex-row gap-3">
                                     <p className="font-bold">${item.total.toFixed(2)}</p>

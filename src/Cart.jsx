@@ -28,10 +28,18 @@ export function GlobalCart({ children }) {
 
     const totalPrice = cartItems.reduce((sum, item) => sum + item.total, 0);
 
+    const updateQuantity = (name, newQty) => {
+        setCartItems(prev => 
+            prev.map(item =>
+                item.name === name ? { ...item, quantity: newQty, total: newQty * item.price } : item
+            )
+        )
+    }
+
     return (
         <Cart.Provider
             value = {{
-                cartItems, addToCart, removeFromCart, clearCart, totalPrice, cartOpen, setCartOpen,
+                cartItems, addToCart, removeFromCart, clearCart, updateQuantity, totalPrice, cartOpen, setCartOpen,
             }}>
                 {children}
         </Cart.Provider>
