@@ -2,7 +2,7 @@ import "../css/Home.css"
 import { FaShoppingCart, FaBars, FaTimes, FaInstagram, FaFacebookSquare, FaImages} from "react-icons/fa";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { useCart } from "../Cart";
@@ -18,6 +18,12 @@ export function Menu() {
   const [Qt, setQt] = useState(false);
   const [Pt, setPt] = useState(false);
   const timeOut = useRef(null);
+
+  const [items, setItems] = useState([]);
+  
+  useEffect(() => {
+    fetch("/api/dishes").then((res) => res.json()).then((data) => setItems(data));
+  }, []);
 
   function setOrder(name, qt, pt) {
     if (timeOut.current) {
@@ -70,7 +76,34 @@ export function Menu() {
             )}
             
             <div className="flex flex-row flex-wrap gap-x-5 gap-y-5 items-center justify-center w-full py-30">
-              <div className="bg-slate-900 shadow-lg hover:scale-110 transition-all duration-300 flex flex-col items-center">
+
+              {items.map((item) => (
+                <div className="bg-slate-900 shadow-lg hover:scale-110 transition-all duration-300 flex flex-col items-center">
+                  <img src={item.image} alt={item.name} className="font-mono text-4x1 text-white size-70 object-cover"></img>
+                  <p className="font-mono text-4x1 text-white text-center p-2">{item.name}</p>
+
+                  {item.type === "normal" && (
+                    <>
+                      <p className="font-mono text-4x1 text-white text-center px-2 pb-2">$7.75</p>
+                      <button className="font-mono text-4md text-white bg-green-500 px-2 py-2 hover:bg-green-700 mb-5" onClick={() => {setOrder(item.name, false, false); addToCart(item.name, +item.price)}}>Add To Cart</button>
+                    </>
+                  )}
+
+                  {item.type === "qtpt" && (
+                    <>
+                      <pre className="font-mono text-4x1 text-white text-center px-2 pb-2">Pt: ${item.pt}    Qt: ${item.qt}</pre>
+                      <div className="flex flex-row gap-5">
+                        <button className="font-mono text-4md text-white bg-green-500 px-2 py-2 hover:bg-green-700 mb-5" onClick={() => {setOrder(item.name, false, true); addToCart(`${item.name} (Pt)`, +item.pt)}}>+ Pt</button>
+                        <button className="font-mono text-4md text-white bg-green-500 px-2 py-2 hover:bg-green-700 mb-5" onClick={() => {setOrder(item.name, true, false); addToCart(`${item.name} (Qt)`, +item.qt)}}>+ Qt</button>
+                      </div>
+                    </>
+                  )}
+
+                </div>
+              ))}
+
+
+{/*               <div className="bg-slate-900 shadow-lg hover:scale-110 transition-all duration-300 flex flex-col items-center">
                 <img src="/images/gts.jpg" alt="General Tso Chicken" className="font-mono text-4x1 text-white size-70 object-cover"></img>
                 <p className="font-mono text-4x1 text-white text-center p-2">General Tso's Chicken</p>
                 <p className="font-mono text-4x1 text-white text-center px-2 pb-2">$7.75</p>
@@ -111,7 +144,7 @@ export function Menu() {
                 <p className="font-mono text-4x1 text-white text-center p-2">Fried Chicken Wings (4 Pieces)</p>
                 <p className="font-mono text-4x1 text-white text-center px-2 pb-2">$6.75</p>
                 <button className="font-mono text-4md text-white bg-green-500 px-2 py-2 hover:bg-green-700 mb-5" onClick={() => {setOrder("Fried Chicken Wings (4 Pieces)", false, false); addToCart("Fried Chicken Wings (4 Pieces)", 6.75)}}>Add To Cart</button>
-              </div>
+              </div> */}
             </div>
         </div>
           

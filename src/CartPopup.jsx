@@ -5,6 +5,34 @@ export default function CartPopup() {
 
     if (!cartOpen) return null;
 
+    async function placeOrder() {
+        if (cartItems.length === 0) return;
+
+        try {
+            const res = await fetch("/api/order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    items: cartItems,
+                    total: totalPrice
+                })
+            })
+
+            const data = await res.json();
+
+            if (res.ok) {
+                alert("Order placed! ID: " + data.orderId);
+                clearCart();
+                setCartOpen(false);
+            } else {
+                alert("Order failed: " + data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Server error placing order");
+        }
+    }
+
     return (
         <div className="fixed inset-0 bg-black/90 flex justify-center items-center z-50" onClick={() => setCartOpen(false)}>
             <div className="bg-slate-900 rounded-2xl shadow-lg w-96 p-6 text-white" onClick={(e) => e.stopPropagation()}>
@@ -51,6 +79,10 @@ export default function CartPopup() {
                         <div className="flex justify-between mt-4">
                             <button onClick={clearCart} className="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                                 Clear
+                            </button>
+
+                            <button onClick={placeOrder} className="bg-green-600 px-3 py-1 rounded hover:bg-gray-800">
+                                Place Order
                             </button>
 
                             <button onClick={() => setCartOpen(false)} className="bg-gray-700 px-3 py-1 rounded hover:bg-gray-800">
